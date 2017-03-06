@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+  <title>Places to Visit in London</title>
+</head>
+<body>
+    <input placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="on">
+    <div id="map"> </div> <style>
+#map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+</style>
+<script language="JavaScript" type="text/javascript" src="js/knockout.js"></script>
+  <script language="JavaScript" type="text/javascript" src="js/viewmodel.js"></script>
+  <script language="JavaScript" type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script   src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyDnlv-U987UQv4X_NyvlmQcRXutAs_IXwc&callback=inintMap"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  </body>
+</html>
