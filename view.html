@@ -2,12 +2,21 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<link href="css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
   <title>Places to Visit in London</title>
 </head>
 <body>
+    <div class="col-md-2" >
     <input placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="on">
-    <div id="map"> </div> <style>
+    <ul data-bind="foreach: locations">
+      <li data-bind="visible: showLocation">
+         <!-- <span data-bind="text: $index"> </span>: -->
+
+    </li>
+</ul>
+    </div>
+    <div class="col-md-10" id="map"> </div> <style>
 #map {
         height: 100%;
       }
