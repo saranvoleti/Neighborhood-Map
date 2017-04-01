@@ -9,9 +9,9 @@
 <body>
     <div class="col-md-2" >
     <input placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="on">
-    <ul data-bind="foreach: locations">
-      <li data-bind="visible: showLocation">
-         <!-- <span data-bind="text: $index"> </span>: -->
+    <ul data-bind="foreach: locationslist">
+      <li data-bind="visible: showlocation">
+         <span data-bind="text: title"> </span>:
 
     </li>
 </ul>
