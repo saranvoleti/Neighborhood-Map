@@ -2,7 +2,12 @@
 var locations = [
       {title: 'Park Ave Penthouse', position: {lat: 40.7713024,  lng: -73.9632393}, content: "Hello"},
       {title: 'Chelsea Loft', position: {lat: 40.7444883,  lng: -73.9949465}, content: "Hello1"},
-      {title: 'Union Square Open Floor Plan', position: {lat: 40.7347062,  lng:  -73.9895759}, content: "Hello2"}
+      {title: 'Union Square Open Floor Plan', position: {lat: 40.7347062,  lng:  -73.9895759}, content: "Hello2"},
+      {title: 'Glenwood - The Caldwell Luxury Apartments', position: {lat: 40.781014,  lng:  -73.950121}, content: "Hello3"},
+      {title: '1214 Fifth Avenue Luxury Apartments', position: {lat: 40.808864,  lng:  -73.952176}, content: "Hello34"}
+
+
+
   ];
 
   var Place = function (place){
@@ -64,8 +69,16 @@ function inintMap() {
 
   },
 
-  success : function (data){
-    console.log(data);
+ success : function (data){
+    var venues = data.response.venues;
+    var infoContent = '<h3>Locations near '+ marker.title + '</h3><ul>'
+    venues.forEach(function(venue){
+      infoContent += '<li>' + venue.name + '</li>';
+
+    });
+    infoContent += '</ul>'
+    infowindow.setContent(infoContent);
+    infowindow.open(map, marker)
   }
 
 
