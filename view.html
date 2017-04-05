@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="initial-scale=1.0">
 <link href="css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
   <title>Places to Visit in London</title>
@@ -15,14 +15,16 @@
     </div>
     <div class="col-md-2" >
     <input placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="on">
-    <ul data-bind="foreach: locationslist">
-      <li data-bind="visible: showlocation">
-         <span data-bind="text: title"> </span>:
+    <ul data-bind="foreach: locationslist" >
+      <li data-bind="visible: showlocation" data-bind="text: title, "  >
+         <span data-bind="text: title, click : marker " > </span>:
 
     </li>
 </ul>
     </div>
-    <div class="col-md-10" id="map"> </div> <style>
+    <div class="col-md-10" id="map"> </div>
+
+    <style>
 #map {
         height: 100%;
       }
