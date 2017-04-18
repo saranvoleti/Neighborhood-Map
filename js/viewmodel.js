@@ -38,15 +38,13 @@ var locations = [{
         },
         content: "Hello34"
     }
-
-
-
 ];
-
+// Model
 var Place = function(place) {
-    this.title = place.title;
-    this.position = place.position;
+    this.title = ko.observable(place.title);
+    this.position = ko.observable(place.position);
     this.marker = place.marker;
+
     this.showlocation = ko.observable(true);
 };
 
@@ -60,7 +58,6 @@ function inintMap() {
         mapTypeId: 'roadmap'
 
     };
-
 
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     map.setTilt(45);
@@ -83,9 +80,11 @@ function inintMap() {
             animation: google.maps.Animation.DROP,
         });
 
-
-
         locations[i].marker = marker;
+
+        function activateMarker() {
+            google.maps.event.trigger(self.mapMarker, "click")
+        }
 
         google.maps.event.addListener(marker, "click", (function(marker) {
             return function(evt) {
@@ -104,24 +103,28 @@ function inintMap() {
 
                     success: function(data) {
                         var venues = data.response.venues;
-                        var infoContent = '<h3>Locations near ' + marker.title + '</h3><ul>';                     venues.forEach(function(venue) {
+                        var infoContent = '<h3>Locations near ' + marker.title + '</h3><ul>';
+
+                        venues.forEach(function(venue) {
                             infoContent += '<li>' + venue.name + '</li>';
 
                         });
+
+
                         infoContent += '</ul>';
                         infowindow.setContent(infoContent);
                         infowindow.open(map, marker);
+                    },
+
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        var infoContent = '<h3>Oops! Something seems to be wrong. Please try later.';
+                        console.log('getJSON request failed! ' + textStatus);
+                        infowindow.setContent(infoContent);
+                        infowindow.open(map, marker);
                     }
-
-
-
-
                 });
             };
         })(marker));
-
-
-
 
         google.maps.event.addListener(marker, 'click', (function(marker) {
             return function(evt) {
@@ -137,14 +140,9 @@ function inintMap() {
                 }
             };
         })(marker));
-
-
         map.fitBounds(bounds);
 
     }
-
-
-
 
     vm.locationslist = ko.observableArray([]);
     locations.forEach(function(place) {
@@ -152,10 +150,14 @@ function inintMap() {
 
     });
 
-
-
-
     vm.query = ko.observable('');
+
+    vm.activateMarker = function() {
+
+        console.log(this.title());
+        google.maps.event.trigger(this.marker, 'click');
+
+    };
 
     vm.search = function() {
         var value = vm.query().toLowerCase();
@@ -171,13 +173,11 @@ function inintMap() {
         }
     };
 
-
-
-
-
     vm.query.subscribe(vm.search);
     ko.applyBindings(vm);
 
+}
 
-
+function mapError() {
+    alert("Opps!! It seems Google Maps has failed to load. Please try again.");
 }
